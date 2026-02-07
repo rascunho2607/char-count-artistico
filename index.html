@@ -265,6 +265,67 @@
             letter-spacing: 1.5px;
         }
 
+        /* Progress bar */
+        .progress-container {
+            margin: 20px 0;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-title {
+            color: var(--neon-yellow);
+            font-size: 1.1rem;
+        }
+
+        .progress-percent {
+            color: var(--neon-cyan);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(5, 10, 25, 0.8);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-coral));
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         /* Controls */
         .controls {
             display: flex;
@@ -307,6 +368,45 @@
             font-size: 1.1rem;
         }
 
+        /* Image info */
+        .image-info {
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .image-name {
+            color: var(--neon-yellow);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .image-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .image-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .stat-name {
+            color: rgba(224, 247, 250, 0.7);
+        }
+
+        .stat-value-small {
+            color: var(--neon-cyan);
+        }
+
         /* Output panel - Art display */
         .output-panel {
             background: linear-gradient(145deg, rgba(16, 20, 40, 0.8), rgba(10, 15, 30, 0.9));
@@ -343,10 +443,10 @@
             justify-content: center;
             background: rgba(5, 10, 25, 0.4);
             border-radius: 12px;
-            padding: 30px;
+            padding: 20px;
             border: 1px solid rgba(0, 243, 255, 0.1);
             position: relative;
-            overflow: hidden;
+            overflow: auto;
             min-height: 600px;
         }
 
@@ -363,14 +463,15 @@
 
         .ascii-art {
             font-family: 'Courier New', monospace;
-            font-size: 16px;
-            line-height: 1.2;
-            letter-spacing: 1px;
-            text-align: center;
+            font-size: 14px;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
             white-space: pre;
-            text-shadow: 0 0 10px currentColor;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            text-shadow: 0 0 5px currentColor;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
             transition: all 0.5s;
+            max-width: 100%;
+            overflow: auto;
         }
 
         /* Color legend */
@@ -456,6 +557,58 @@
             letter-spacing: 2px;
         }
 
+        /* Image selector */
+        .image-selector {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        .selector-title {
+            color: var(--neon-yellow);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .image-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .image-btn {
+            background: rgba(20, 30, 50, 0.5);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: rgba(224, 247, 250, 0.8);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .image-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .image-btn.active {
+            background: rgba(0, 243, 255, 0.2);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .container {
@@ -465,6 +618,10 @@
             
             .art-container {
                 min-height: 500px;
+            }
+            
+            .ascii-art {
+                font-size: 12px;
             }
         }
 
@@ -483,6 +640,10 @@
             
             .controls {
                 flex-direction: column;
+            }
+            
+            .ascii-art {
+                font-size: 10px;
             }
         }
 
@@ -547,7 +708,7 @@
             <div class="title-container">
                 <div>
                     <h1 class="title">Char Count Artístico</h1>
-                    <div class="subtitle">Generative ASCII Cyber-Art</div>
+                    <div class="subtitle">Complete ASCII Images with Text</div>
                 </div>
                 <div style="color: var(--neon-yellow); font-size: 1.2rem;">
                     <i class="fas fa-code"></i>
@@ -561,7 +722,7 @@
             </h2>
             
             <div class="textarea-container">
-                <textarea class="text-input" id="textInput" placeholder="Enter your text here... Watch as each character transforms into visual art.">Char Count Artístico transforms text into generative visual art. Each character becomes a pixel in a unique digital canvas. Vowels glow red, consonants shine cyan, numbers burn yellow, and punctuation pulses green. This is more than a character counter—it's a creative coding experiment where text becomes texture, words become patterns, and language becomes visual poetry.</textarea>
+                <textarea class="text-input" id="textInput" placeholder="Digite seu texto aqui... A imagem ASCII será preenchida conforme você digita. Quanto mais texto, mais da imagem será revelada!">Char Count Artístico é uma experiência interativa onde você preenche imagens ASCII com seu texto. Cada caractere que você digita revela uma parte da imagem. Vogais brilham em coral, consoantes em ciano, números em amarelo e pontuação em verde. Continue digitando para ver a imagem completa se revelar!</textarea>
                 <div class="caret"><i class="fas fa-caret-right"></i></div>
             </div>
             
@@ -580,8 +741,43 @@
                 </div>
             </div>
             
+            <div class="progress-container">
+                <div class="progress-info">
+                    <div class="progress-title">Progresso da Imagem</div>
+                    <div class="progress-percent" id="progressPercent">0%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <div class="image-info">
+                <div class="image-name" id="currentImageName">Carregando imagem...</div>
+                <div class="image-stats">
+                    <div class="image-stat">
+                        <span class="stat-name">Tamanho:</span>
+                        <span class="stat-value-small" id="imageSize">0x0</span>
+                    </div>
+                    <div class="image-stat">
+                        <span class="stat-name">Caracteres:</span>
+                        <span class="stat-value-small" id="imageChars">0</span>
+                    </div>
+                    <div class="image-stat">
+                        <span class="stat-name">Preenchido:</span>
+                        <span class="stat-value-small" id="filledChars">0</span>
+                    </div>
+                    <div class="image-stat">
+                        <span class="stat-name">Restante:</span>
+                        <span class="stat-value-small" id="remainingChars">0</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="controls">
-                <button class="control-btn active" id="modeFace">
+                <button class="control-btn active" id="modeImage">
+                    <i class="fas fa-image"></i> Complete Image
+                </button>
+                <button class="control-btn" id="modeFace">
                     <i class="fas fa-user-circle"></i> Face
                 </button>
                 <button class="control-btn" id="modeSymbol">
@@ -590,31 +786,37 @@
                 <button class="control-btn" id="modePattern">
                     <i class="fas fa-snowflake"></i> Pattern
                 </button>
-                <button class="control-btn" id="modeAbstract">
-                    <i class="fas fa-project-diagram"></i> Abstract
+                <button class="control-btn" id="modeRandom">
+                    <i class="fas fa-random"></i> Random Image
                 </button>
-                <button class="control-btn" id="modeSpiral">
-                    <i class="fas fa-sync-alt"></i> Spiral
-                </button>
+            </div>
+            
+            <div class="image-selector">
+                <div class="selector-title">
+                    <i class="fas fa-th"></i> Selecionar Imagem
+                </div>
+                <div class="image-buttons" id="imageButtons">
+                    <!-- Buttons will be generated dynamically -->
+                </div>
             </div>
             
             <div class="examples-panel">
                 <div class="examples-title">
-                    <i class="fas fa-vial"></i> Example Texts
+                    <i class="fas fa-vial"></i> Textos de Exemplo
                 </div>
                 <div class="example-buttons">
-                    <button class="example-btn" data-example="short">Short</button>
-                    <button class="example-btn" data-example="poem">Poem</button>
-                    <button class="example-btn" data-example="code">Code</button>
+                    <button class="example-btn" data-example="short">Curto</button>
+                    <button class="example-btn" data-example="poem">Poema</button>
+                    <button class="example-btn" data-example="code">Código</button>
                     <button class="example-btn" data-example="lorem">Lorem Ipsum</button>
-                    <button class="example-btn" data-example="clear">Clear</button>
+                    <button class="example-btn" data-example="clear">Limpar</button>
                 </div>
             </div>
         </div>
         
         <div class="output-panel">
             <h2 class="panel-title">
-                <i class="fas fa-palette"></i> Generative Art Output
+                <i class="fas fa-palette"></i> ASCII Art Generator
             </h2>
             
             <div class="art-container">
@@ -624,29 +826,29 @@
             <div class="color-legend">
                 <div class="legend-item">
                     <div class="legend-color" style="color: #ff4d8d;"></div>
-                    <span class="legend-label">Vowels</span>
+                    <span class="legend-label">Vogais</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="color: #00f3ff;"></div>
-                    <span class="legend-label">Consonants</span>
+                    <span class="legend-label">Consoantes</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="color: #ffeb3b;"></div>
-                    <span class="legend-label">Numbers</span>
+                    <span class="legend-label">Números</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="color: #00ff9d;"></div>
-                    <span class="legend-label">Punctuation</span>
+                    <span class="legend-label">Pontuação</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color" style="color: #b967ff;"></div>
-                    <span class="legend-label">Spaces</span>
+                    <span class="legend-label">Espaços</span>
                 </div>
             </div>
         </div>
         
         <footer class="footer">
-            Char Count Artístico • Generative ASCII Cyber-Art • Each Character Becomes a Pixel
+            Char Count Artístico • Complete ASCII Images with Text • Each Character Reveals the Art
         </footer>
     </div>
 
@@ -657,45 +859,337 @@
         const wordCount = document.getElementById('wordCount');
         const lineCount = document.getElementById('lineCount');
         const asciiArt = document.getElementById('asciiArt');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressFill = document.getElementById('progressFill');
+        const currentImageName = document.getElementById('currentImageName');
+        const imageSize = document.getElementById('imageSize');
+        const imageChars = document.getElementById('imageChars');
+        const filledChars = document.getElementById('filledChars');
+        const remainingChars = document.getElementById('remainingChars');
+        const imageButtons = document.getElementById('imageButtons');
         const modeButtons = document.querySelectorAll('.control-btn');
         const exampleButtons = document.querySelectorAll('.example-btn');
         
         // State
-        let currentMode = 'face';
+        let currentMode = 'image';
+        let currentImage = null;
+        let currentImageIndex = 0;
         let lastText = '';
+        
+        // ASCII Image Database
+        const asciiImages = [
+            {
+                name: "Ciberpunk City",
+                width: 60,
+                height: 30,
+                data: `           .-^-.
+          /     \\
+         /       \\
+        /         \\
+       /           \\
+      /             \\
+     /               \\
+    /                 \\
+   /                   \\
+  /                     \\
+ /                       \\
+/                         \\
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+|                         |
+\\                         /
+ \\                       /
+  \\                     /
+   \\                   /
+    \\                 /
+     \\               /
+      \\             /
+       \\           /
+        \\         /
+         \\       /
+          \\     /
+           '-^-'`
+            },
+            {
+                name: "Robô ASCII",
+                width: 40,
+                height: 40,
+                data: `        .-----.
+       /       \\
+      /         \\
+     /           \\
+    /             \\
+   /               \\
+  /                 \\
+ /                   \\
+|                     |
+|    [ ]     [ ]     |
+|      \\_____/       |
+|                     |
+|        ___         |
+|       /   \\        |
+|      |     |       |
+|       \\___/        |
+|                     |
+|    \\         /     |
+|     \\       /      |
+|      \\_____/       |
+|                     |
+|    /---------\\     |
+|   /           \\    |
+|  /             \\   |
+| /               \\  |
+|/                 \\ |
+|                   ||
+|                   ||
+|                   ||
+|                   ||
+ \\                 //
+  \\               //
+   \\             //
+    \\           //
+     \\_________//`
+            },
+            {
+                name: "Nave Espacial",
+                width: 50,
+                height: 25,
+                data: `         /\\
+        /  \\
+       /    \\
+      /      \\
+     /        \\
+    /          \\
+   /            \\
+  /              \\
+ /                \\
+/                  \\
+|                  |
+|       [*]        |
+|                  |
+|    |------|      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |      |      |
+|    |______|      |
+|                  |
+\\                  /
+ \\                /
+  \\              /
+   \\            /
+    \\          /
+     \\        /
+      \\      /
+       \\    /
+        \\  /
+         \\/`
+            },
+            {
+                name: "Coração Digital",
+                width: 45,
+                height: 20,
+                data: `     .'''''.     
+    ' .:::.. '    
+   .:::::::::.   
+  .:::::::::::.  
+ .:::::::::::::. 
+ ::::::::::::::: 
+ ::::::::::::::: 
+ ::::::::::::::: 
+ ::::::::::::::: 
+ ::::::::::::::: 
+ ::::::::::::::: 
+  :::::::::::::  
+   :::::::::::   
+    :::::::::    
+     :::::::     
+      :::::      
+       :::       
+        :        `
+            },
+            {
+                name: "Cérebro Digital",
+                width: 55,
+                height: 35,
+                data: `        .---.       
+       /     \\      
+      /       \\     
+     /         \\    
+    /           \\   
+   /             \\  
+  /               \\ 
+ /                 \\
+|                   |
+|    .---. .---.    |
+|   /     Y     \\   |
+|  |             |  |
+|  |     .-.     |  |
+|  |    (   )    |  |
+|  |     '-'     |  |
+|  |             |  |
+|  |  .-------.  |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | |         | |  |
+|  | '-------' |  |
+|  |           |  |
+|  |           |  |
+|  |           |  |
+|  |           |  |
+|  |           |  |
+|  \\           /  |
+|   \\         /   |
+|    \\       /    |
+|     \\_____/     |
+|                 |
+ \\               /
+  \\             /
+   \\           /
+    \\         /
+     \\       /
+      \\_____/`
+            },
+            {
+                name: "Gato ASCII",
+                width: 40,
+                height: 25,
+                data: `        /\\_/\\       
+       / o o \\      
+      (   "   )     
+       \\~(*)~/      
+        \\   /       
+         | |        
+        /   \\       
+       /     \\      
+      |       |     
+     /| |   | |\\    
+    / | |   | | \\   
+   |  | |   | |  |  
+   |  | |   | |  |  
+   \\  \\ \\   / /  /  
+    \\  \\|   |/  /   
+     \\  |   |  /    
+      \\ |   | /     
+       \\|   |/      
+        |   |       
+        |   |       
+        |   |       
+        |___|       `
+            },
+            {
+                name: "Árvore Binária",
+                width: 50,
+                height: 30,
+                data: `                     
+           .          
+          / \\         
+         /   \\        
+        /     \\       
+       /       \\      
+      /         \\     
+     /           \\    
+    /             \\   
+   /               \\  
+  /                 \\ 
+ /                   \\
+|                     |
+|          *          |
+|         / \\         |
+|        /   \\        |
+|       /     \\       |
+|      /       \\      |
+|     /         \\     |
+|    /           \\    |
+|   *             *   |
+|  / \\           / \\  |
+| /   \\         /   \\ |
+|/     \\       /     \\|
+*       *     *       *
+|\\     / \\   / \\     /|
+| \\   /   \\ /   \\   / |
+|  \\ /     *     \\ /  |
+|   *     / \\     *   |
+|  / \\   /   \\   / \\  |
+| /   \\ /     \\ /   \\ |
+|/     *       *     \\|
+*     / \\     / \\     *
+ \\   /   \\   /   \\   /
+  \\ /     \\ /     \\ /
+   *       *       *  
+  / \\     / \\     / \\ 
+ /   \\   /   \\   /   \\
+/     \\ /     \\ /     \\`
+            }
+        ];
         
         // Example texts
         const examples = {
-            short: "Char Count Artístico\nTransform text into art.\nEach character = visual element.",
-            poem: `Digital canvas, pixel dreams
-Letters flowing in data streams
-Vowels glow with crimson light
-Consonants in cyan bright
-Text becomes a visual scene
-In this cyber-art machine`,
-            code: `function generateArt(text) {
-  let art = "";
-  for(let char of text) {
-    if (/[aeiou]/i.test(char)) {
-      art += char;
-    } else if (/[a-z]/i.test(char)) {
-      art += char;
-    } else if (/\\d/.test(char)) {
-      art += char;
-    } else if (/[\\W_]/.test(char)) {
-      art += char;
+            short: "Char Count Artístico transforma texto em arte ASCII. Digite mais para ver a imagem se completar!",
+            poem: `Pixels de texto, arte digital
+Cada letra conta, cada espaço igual
+Imagens se formam, linhas por linhas
+Em cores neon, nas telas divinas
+ASCII revela, conforme eu digito
+Um mundo cyber, bonito e infinito`,
+            code: `function completeImage(text, image) {
+  let result = "";
+  let textIndex = 0;
+  
+  for(let i = 0; i < image.length; i++) {
+    if(image[i] === '\\n') {
+      result += '\\n';
+    } else if(textIndex < text.length && image[i] !== ' ') {
+      result += colorizeChar(text[textIndex]);
+      textIndex++;
     } else {
-      art += char;
+      result += '<span style="color:#333">' + image[i] + '</span>';
     }
   }
-  return art;
+  
+  return result;
 }`,
-            lorem: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+            lorem: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.`,
             clear: ""
         };
         
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Select random image to start
+            currentImageIndex = Math.floor(Math.random() * asciiImages.length);
+            currentImage = asciiImages[currentImageIndex];
+            
+            // Create image selection buttons
+            createImageButtons();
+            
+            // Update everything
             updateStats();
             generateArt();
             
@@ -711,6 +1205,14 @@ In this cyber-art machine`,
                     modeButtons.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     currentMode = btn.id.replace('mode', '').toLowerCase();
+                    
+                    if (currentMode === 'random') {
+                        // Select random image
+                        currentImageIndex = Math.floor(Math.random() * asciiImages.length);
+                        currentImage = asciiImages[currentImageIndex];
+                        updateImageButtons();
+                    }
+                    
                     generateArt();
                 });
             });
@@ -731,8 +1233,47 @@ In this cyber-art machine`,
                     generateArt();
                     lastText = textInput.value;
                 }
-            }, 1000);
+            }, 500);
         });
+        
+        // Create image selection buttons
+        function createImageButtons() {
+            imageButtons.innerHTML = '';
+            
+            asciiImages.forEach((image, index) => {
+                const button = document.createElement('button');
+                button.className = `image-btn ${index === currentImageIndex ? 'active' : ''}`;
+                button.textContent = image.name;
+                button.dataset.index = index;
+                
+                button.addEventListener('click', () => {
+                    currentImageIndex = parseInt(button.dataset.index);
+                    currentImage = asciiImages[currentImageIndex];
+                    updateImageButtons();
+                    generateArt();
+                });
+                
+                imageButtons.appendChild(button);
+            });
+        }
+        
+        // Update image buttons active state
+        function updateImageButtons() {
+            const buttons = imageButtons.querySelectorAll('.image-btn');
+            buttons.forEach((btn, index) => {
+                btn.classList.toggle('active', index === currentImageIndex);
+            });
+            
+            // Update image info
+            if (currentImage) {
+                currentImageName.textContent = currentImage.name;
+                imageSize.textContent = `${currentImage.width}x${currentImage.height}`;
+                
+                // Calculate total non-space characters in image
+                const totalChars = currentImage.data.replace(/[\s\n]/g, '').length;
+                imageChars.textContent = totalChars;
+            }
+        }
         
         // Update statistics
         function updateStats() {
@@ -745,6 +1286,19 @@ In this cyber-art machine`,
             animateValue(charCount, parseInt(charCount.textContent) || 0, chars);
             animateValue(wordCount, parseInt(wordCount.textContent) || 0, words);
             animateValue(lineCount, parseInt(lineCount.textContent) || 0, lines);
+            
+            // Update image progress
+            if (currentImage && currentMode === 'image') {
+                const totalChars = currentImage.data.replace(/[\s\n]/g, '').length;
+                const filled = Math.min(chars, totalChars);
+                const percent = totalChars > 0 ? Math.min(100, Math.round((filled / totalChars) * 100)) : 0;
+                
+                progressPercent.textContent = `${percent}%`;
+                progressFill.style.width = `${percent}%`;
+                
+                filledChars.textContent = filled;
+                remainingChars.textContent = Math.max(0, totalChars - filled);
+            }
         }
         
         // Animate number changes
@@ -775,64 +1329,66 @@ In this cyber-art machine`,
         // Generate ASCII art
         function generateArt() {
             const text = textInput.value || ' ';
-            const art = createArt(text, currentMode);
+            let art;
+            
+            switch(currentMode) {
+                case 'image':
+                    art = generateImageArt(text);
+                    break;
+                case 'face':
+                    art = generateFaceArt(text);
+                    break;
+                case 'symbol':
+                    art = generateSymbolArt(text);
+                    break;
+                case 'pattern':
+                    art = generatePatternArt(text);
+                    break;
+                default:
+                    art = generateImageArt(text);
+            }
+            
             asciiArt.innerHTML = art;
         }
         
-        // Create art based on mode
-        function createArt(text, mode) {
-            // If no text, show placeholder
-            if (!text.trim()) {
-                return `<span style="color:#666">Enter text to generate art...</span>`;
+        // Generate image completion art
+        function generateImageArt(text) {
+            if (!currentImage) {
+                return '<span style="color:#666">Carregando imagem...</span>';
             }
             
-            // Analyze text for character distribution
-            const analysis = analyzeText(text);
+            let result = '';
+            const imageData = currentImage.data;
+            let textIndex = 0;
             
-            // Create art based on selected mode
-            let art = '';
-            
-            switch(mode) {
-                case 'face':
-                    art = generateFaceArt(text, analysis);
-                    break;
-                case 'symbol':
-                    art = generateSymbolArt(text, analysis);
-                    break;
-                case 'pattern':
-                    art = generatePatternArt(text, analysis);
-                    break;
-                case 'abstract':
-                    art = generateAbstractArt(text, analysis);
-                    break;
-                case 'spiral':
-                    art = generateSpiralArt(text, analysis);
-                    break;
-                default:
-                    art = generateFaceArt(text, analysis);
+            for (let i = 0; i < imageData.length; i++) {
+                const char = imageData[i];
+                
+                if (char === '\n') {
+                    result += '\n';
+                } else if (textIndex < text.length && char !== ' ') {
+                    // Use text character to fill image
+                    result += colorizeChar(text[textIndex]);
+                    textIndex++;
+                } else {
+                    // Show outline or empty space
+                    if (char === ' ') {
+                        result += ' ';
+                    } else {
+                        result += '<span style="color:#333">' + escapeHtml(char) + '</span>';
+                    }
+                }
             }
             
-            return art;
+            return result;
         }
         
-        // Analyze text for character types
-        function analyzeText(text) {
-            const vowels = (text.match(/[aeiouáéíóúãõâêîôûàèìòùäëïöü]/gi) || []).length;
-            const consonants = (text.match(/[bcdfghjklmnpqrstvwxyzç]/gi) || []).length;
-            const numbers = (text.match(/\d/g) || []).length;
-            const spaces = (text.match(/\s/g) || []).length;
-            const punctuation = (text.match(/[.,!?;:'"`~@#$%^&*()_+=\-[\]{}|\\<>/?]/g) || []).length;
-            
-            return { vowels, consonants, numbers, spaces, punctuation };
-        }
-        
-        // Generate face art
-        function generateFaceArt(text, analysis) {
+        // Generate face art (existing function)
+        function generateFaceArt(text) {
             let result = '';
             const chars = text.split('');
             const gridSize = Math.min(30, Math.ceil(Math.sqrt(text.length * 2)));
             
-            // Create a face pattern
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
                     const index = (y * gridSize + x) % chars.length;
@@ -842,7 +1398,6 @@ In this cyber-art machine`,
                         Math.pow(y - gridSize/2, 2)
                     );
                     
-                    // Face elements
                     const isFace = distance < gridSize/2;
                     const isEye = (
                         (y > gridSize/3 && y < gridSize/2) && 
@@ -875,8 +1430,8 @@ In this cyber-art machine`,
             return result;
         }
         
-        // Generate symbol art
-        function generateSymbolArt(text, analysis) {
+        // Generate symbol art (existing function)
+        function generateSymbolArt(text) {
             let result = '';
             const chars = text.split('');
             const gridSize = Math.min(25, Math.ceil(Math.sqrt(text.length * 1.5)));
@@ -928,13 +1483,12 @@ In this cyber-art machine`,
             return result;
         }
         
-        // Generate pattern art
-        function generatePatternArt(text, analysis) {
+        // Generate pattern art (existing function)
+        function generatePatternArt(text) {
             let result = '';
             const chars = text.split('');
             const gridSize = Math.min(40, Math.ceil(Math.sqrt(text.length)));
             
-            // Create a procedural pattern based on text hash
             let hash = 0;
             for (let i = 0; i < text.length; i++) {
                 hash = (hash << 5) - hash + text.charCodeAt(i);
@@ -946,7 +1500,6 @@ In this cyber-art machine`,
                     const index = (y * gridSize + x) % chars.length;
                     const char = chars[index];
                     
-                    // Generate pattern
                     const noise = Math.sin(x * 0.3 + hash) * Math.cos(y * 0.3 + hash) + 
                                  Math.sin(x * y * 0.05) * Math.cos(hash * 0.01);
                     
@@ -959,85 +1512,10 @@ In this cyber-art machine`,
             return result;
         }
         
-        // Generate abstract art
-        function generateAbstractArt(text, analysis) {
-            let result = '';
-            const chars = text.split('');
-            const gridSize = Math.min(35, Math.ceil(Math.sqrt(text.length * 1.2)));
-            
-            // Distribute characters in an abstract pattern
-            for (let y = 0; y < gridSize; y++) {
-                for (let x = 0; x < gridSize; x++) {
-                    const index = (y * gridSize + x) % chars.length;
-                    const char = chars[index];
-                    
-                    // Abstract pattern based on position
-                    const patternValue = Math.sin(x * 0.5) * Math.cos(y * 0.3) + 
-                                       Math.sin((x + y) * 0.2) * 0.5;
-                    
-                    const displayChar = patternValue > 0 ? char : '·';
-                    result += colorizeChar(displayChar);
-                }
-                result += '\n';
-            }
-            
-            return result;
-        }
-        
-        // Generate spiral art
-        function generateSpiralArt(text, analysis) {
-            let result = '';
-            const chars = text.split('');
-            const gridSize = Math.min(30, Math.ceil(Math.sqrt(text.length * 1.5)));
-            
-            // Create spiral pattern
-            const centerX = Math.floor(gridSize / 2);
-            const centerY = Math.floor(gridSize / 2);
-            
-            // Initialize grid with spaces
-            const grid = Array(gridSize).fill().map(() => Array(gridSize).fill(' '));
-            
-            // Spiral parameters
-            let x = 0, y = 0;
-            let dx = 0, dy = -1;
-            let t = Math.max(gridSize, gridSize);
-            const maxI = t * t;
-            
-            // Fill spiral with characters
-            for (let i = 0; i < Math.min(maxI, chars.length); i++) {
-                if ((-gridSize/2 <= x) && (x <= gridSize/2) && (-gridSize/2 <= y) && (y <= gridSize/2)) {
-                    const gridX = x + centerX;
-                    const gridY = y + centerY;
-                    if (gridX >= 0 && gridX < gridSize && gridY >= 0 && gridY < gridSize) {
-                        grid[gridY][gridX] = chars[i % chars.length];
-                    }
-                }
-                
-                // Spiral rotation logic
-                if ((x === y) || (x < 0 && x === -y) || (x > 0 && x === 1 - y)) {
-                    t = dx;
-                    dx = -dy;
-                    dy = t;
-                }
-                x += dx;
-                y += dy;
-            }
-            
-            // Build output from grid
-            for (let y = 0; y < gridSize; y++) {
-                for (let x = 0; x < gridSize; x++) {
-                    result += colorizeChar(grid[y][x]);
-                }
-                result += '\n';
-            }
-            
-            return result;
-        }
-        
         // Colorize character based on type
         function colorizeChar(char) {
-            if (char === ' ') {
-                return '<span style="color:#b967ff; opacity:0.3">·</span>';
+            if (char === ' ' || !char) {
+                return ' ';
             }
             
             const charLower = char.toLowerCase();
